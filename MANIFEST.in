@@ -1,0 +1,7 @@
+recursive-include micropython py/** mpy-cross/** shared/** tools/**
+exclude micropython/mpy-cross/mpy-cross*
+include micropython/mpy-cross/mpy-cross.vcxproj
+prune micropython/mpy-cross/build*
+prune micropython/ports*
+exclude src/mpy_cross_v5/mpy-cross*
+prune src/mpy_cross_v5.egg-info
