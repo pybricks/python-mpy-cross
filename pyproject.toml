@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mpy-cross-v5"
+version = "1.0.0"
+description = "Python wrapper for the mpy-cross tool from MicroPython."
+readme = "README.md"
+
+[project.scripts]
+mpy-cross-v5 = "mpy_cross_v5:_run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mpy_cross_v5 = ["mpy-cross*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["build/lib"]
+norecursedirs = ["micropython/*"]
+
+[tool.black]
+extend-exclude = "micropython"
+
+[tool.cibuildwheel]
+build = "cp38-*"
