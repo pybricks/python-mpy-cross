@@ -1,7 +1,7 @@
 from enum import IntFlag
 import struct
 
-from mpy_cross_v5 import mpy_cross_compile, mpy_cross_version
+from mpy_cross_v6 import mpy_cross_compile, mpy_cross_version
 
 
 class FeatureFlags(IntFlag):
@@ -15,7 +15,7 @@ def test_compile_no_opts():
     magic, version, flags, small_int_bits = struct.unpack_from("BBBB", mpy)
 
     assert chr(magic) == "M"
-    assert version == 5
+    assert version == 6
     assert flags == FeatureFlags.UNICODE
     assert small_int_bits == 31
 
@@ -27,7 +27,7 @@ def test_compile_opt_no_unicode():
     magic, version, flags, small_int_bits = struct.unpack_from("BBBB", mpy)
 
     assert chr(magic) == "M"
-    assert version == 5
+    assert version == 6
     assert flags == 0
     assert small_int_bits == 31
 
@@ -39,7 +39,7 @@ def test_compile_opt_small_int_bits():
     magic, version, flags, small_int_bits = struct.unpack_from("BBBB", mpy)
 
     assert chr(magic) == "M"
-    assert version == 5
+    assert version == 6
     assert flags == FeatureFlags.UNICODE
     assert small_int_bits == 63
 
@@ -55,4 +55,4 @@ def test_compile_with_syntax_error():
 def test_version():
     ver = mpy_cross_version()
 
-    assert "mpy-cross emitting mpy v5" in ver
+    assert "mpy-cross emitting mpy v6" in ver

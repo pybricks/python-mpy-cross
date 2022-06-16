@@ -51,7 +51,7 @@ class custom_build(build):
 
         subprocess.check_call(make_command)
 
-        shutil.copy(str(MPY_CROSS_EXE), self.build_lib + "/mpy_cross_v5")
+        shutil.copy(str(MPY_CROSS_EXE), self.build_lib + "/mpy_cross_v6")
 
 
 class custom_install(install):
