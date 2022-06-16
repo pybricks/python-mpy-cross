@@ -37,7 +37,6 @@ def mpy_cross_compile(
     file_contents: str,
     optimization_level: Optional[int] = None,
     small_number_bits: Optional[int] = None,
-    no_unicode: bool = False,
     arch: Optional[Arch] = None,
     emit: Optional[Emitter] = None,
     heap_size: Optional[int] = None,
@@ -51,8 +50,6 @@ def mpy_cross_compile(
         file_contents: The MicroPython source code to compile.
         optimization_level: The optimization level 0 to 3.
         small_number_bits: The number of bits in a MP_SMALL_INT.
-        no_unicode: Flag needed if the MicroPython target firmware was compiled
-            with ``MICROPY_PY_BUILTINS_STR_UNICODE (0)``.
         arch: The target architecture.
         emit: The type of bytecodes to emit.
         heap_size: The heap size.
@@ -93,9 +90,6 @@ def mpy_cross_compile(
 
         if small_number_bits is not None:
             args.append(f"-msmall-int-bits={small_number_bits}")
-
-        if no_unicode:
-            args.append("-mno-unicode")
 
         if arch is not None:
             args.append(f"-arch={arch.value}")
