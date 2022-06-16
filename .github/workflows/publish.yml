@@ -2,10 +2,13 @@ name: Build and upload to PyPI
 
 on:
   push:
+    branches:
+      - mpy-cross-v5
+    tags:
+      - mpy-cross-v5/*
   pull_request:
-  release:
-    types:
-      - published
+    branches:
+      - mpy-cross-v5
 
 jobs:
   build_wheels:
@@ -54,8 +57,8 @@ jobs:
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-22.04
-    # upload to PyPI on every tag starting with 'v'
-    if: github.event_name == 'release' && github.event.action == 'published'
+    # upload to PyPI on every tag
+    if: github.event_name == 'push' && github.ref_type == 'tag'
     steps:
       - uses: actions/download-artifact@v2
         with:
