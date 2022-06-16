@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mpy-cross-6"
+name = "mpy-cross-v6"
 version = "1.0.0"
 description = "Python wrapper for the mpy-cross tool from MicroPython."
 readme = "README.md"
