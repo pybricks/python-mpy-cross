@@ -18,6 +18,7 @@ class Arch(Enum):
     X86 = "x86"
     X64 = "x64"
     ARMV6 = "armv6"
+    ARMV6M = "armv6m"
     ARMV7M = "armv7m"
     ARMV7EM = "armv7em"
     ARMV7EMSP = "armv7emsp"
