@@ -1,4 +1,5 @@
 recursive-include micropython py/** mpy-cross/** shared/** tools/**
+include micropython/docs/conf.py
 exclude micropython/mpy-cross/mpy-cross*
 include micropython/mpy-cross/mpy-cross.vcxproj
 prune micropython/mpy-cross/build*
