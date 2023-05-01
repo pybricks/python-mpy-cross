@@ -10,9 +10,6 @@ from wheel.bdist_wheel import bdist_wheel
 
 PROJECT_DIR = pathlib.Path(__file__).parent
 MPY_CROSS_DIR = PROJECT_DIR / "micropython" / "mpy-cross"
-MPY_CROSS_EXE = (MPY_CROSS_DIR / "mpy-cross").with_suffix(
-    ".exe" if platform.system() == "Windows" else ""
-)
 
 # map of distutils platform id to compiler target triple
 PLAT_TO_CLANG_TARGET = {
@@ -27,9 +24,13 @@ class custom_build(build):
     def run(self):
         super().run()
 
+        mpy_cross_exe = (
+            MPY_CROSS_DIR / f"build-{self.plat_name}" / "mpy-cross"
+        ).with_suffix(".exe" if platform.system() == "Windows" else "")
+
         # all builds put exe in the same place, so we have to remove to avoid
         # make not rebuilding for different arch
-        MPY_CROSS_EXE.unlink(missing_ok=True)
+        mpy_cross_exe.unlink(missing_ok=True)
 
         make_command = [
             "make",
@@ -51,7 +52,7 @@ class custom_build(build):
 
         subprocess.check_call(make_command)
 
-        shutil.copy(str(MPY_CROSS_EXE), self.build_lib + "/mpy_cross_v6")
+        shutil.copy(str(mpy_cross_exe), self.build_lib + "/mpy_cross_v6_1")
 
 
 class custom_install(install):

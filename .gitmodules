@@ -1,4 +1,4 @@
 [submodule "micropython"]
 	path = micropython
 	url = https://github.com/pybricks/micropython.git
-	branch = python-mpy-cross-v6
+	branch = python-mpy-cross-v6.1

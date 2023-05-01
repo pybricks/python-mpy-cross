@@ -3,12 +3,12 @@ name: Build and upload to PyPI
 on:
   push:
     branches:
-      - mpy-cross-v6
+      - mpy-cross-v6.1
     tags:
-      - mpy-cross-v6/*
+      - mpy-cross-v6.1/*
   pull_request:
     branches:
-      - mpy-cross-v6
+      - mpy-cross-v6.1
 
 jobs:
   build_wheels:
@@ -68,4 +68,4 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@v1.6.4
         with:
           user: __token__
-          password: ${{ secrets.PYPI_TOKEN2 }}
+          password: ${{ secrets.PYPI_TOKEN3 }}

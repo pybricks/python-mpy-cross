@@ -1,7 +1,6 @@
-from enum import IntFlag
 import struct
 
-from mpy_cross_v6 import mpy_cross_compile, mpy_cross_version
+from mpy_cross_v6_1 import mpy_cross_compile, mpy_cross_version
 
 
 def test_compile_no_opts():

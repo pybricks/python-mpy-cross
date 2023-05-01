@@ -3,19 +3,19 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mpy-cross-v6"
-version = "1.0.1"
+name = "mpy-cross-v6.1"
+version = "1.0.0"
 description = "Python wrapper for the mpy-cross tool from MicroPython."
 readme = "README.md"
 
 [project.scripts]
-mpy-cross-v6 = "mpy_cross_v6:_run"
+"mpy-cross-v6.1" = "mpy_cross_v6_1:_run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-mpy_cross_v6 = ["mpy-cross*"]
+mpy_cross_v6_1 = ["mpy-cross*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["build/lib"]
