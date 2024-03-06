@@ -98,7 +98,7 @@ def mpy_cross_compile(
             args.append("-mno-unicode")
 
         if arch is not None:
-            args.append(f"-arch={arch.value}")
+            args.append(f"-march={arch.value}")
 
         if emit is not None:
             args += ["-X", f"emit={emit.value}"]
