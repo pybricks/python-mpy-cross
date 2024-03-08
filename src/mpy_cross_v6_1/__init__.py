@@ -93,7 +93,7 @@ def mpy_cross_compile(
             args.append(f"-msmall-int-bits={small_number_bits}")
 
         if arch is not None:
-            args.append(f"-arch={arch.value}")
+            args.append(f"-march={arch.value}")
 
         if emit is not None:
             args += ["-X", f"emit={emit.value}"]
