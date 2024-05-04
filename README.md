@@ -14,6 +14,10 @@ For MicroPython 1.19:
 
     pip install mpy-cross-v6
 
-For MicroPython 1.20+:
+For MicroPython 1.20 to 1.21:
 
     pip install mpy-cross-v6.1
+
+For MicroPython 1.22:
+
+    pip install mpy-cross-v6.2

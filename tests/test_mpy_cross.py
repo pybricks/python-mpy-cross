@@ -1,6 +1,6 @@
 import struct
 
-from mpy_cross_v6_1 import mpy_cross_compile, mpy_cross_version
+from mpy_cross_v6_2 import mpy_cross_compile, mpy_cross_version
 
 
 def test_compile_no_opts():
@@ -38,4 +38,4 @@ def test_compile_with_syntax_error():
 def test_version():
     ver = mpy_cross_version()
 
-    assert "mpy-cross emitting mpy v6" in ver
+    assert "mpy-cross emitting mpy v6.2" in ver

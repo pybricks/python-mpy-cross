@@ -2,5 +2,5 @@ recursive-include micropython py/** mpy-cross/** shared/** tools/**
 include micropython/docs/conf.py
 prune micropython/mpy-cross/build*
 prune micropython/ports*
-exclude src/mpy_cross_v6.1/mpy-cross*
-prune src/mpy_cross_v6.1.egg-info
+exclude src/mpy_cross_v6.2/mpy-cross*
+prune src/mpy_cross_v6.2.egg-info
