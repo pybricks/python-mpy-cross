@@ -15,7 +15,7 @@ readme = "README.md"
 where = ["src"]
 
 [tool.setuptools.package-data]
-mpy_cross_v6_1 = ["mpy-cross*"]
+mpy_cross_v6_2 = ["mpy-cross*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["build/lib"]
@@ -26,3 +26,5 @@ extend-exclude = "micropython"
 
 [tool.cibuildwheel]
 build = "cp38-*"
+test-requires = "pytest"
+test-command = "pytest {project}/tests"
