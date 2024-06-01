@@ -59,6 +59,9 @@ jobs:
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
     # upload to PyPI on every tag
     if: github.event_name == 'push' && github.ref_type == 'tag'
     steps:
@@ -69,6 +72,3 @@ jobs:
           path: dist
 
       - uses: pypa/gh-action-pypi-publish@v1.8.14
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_TOKEN4 }}
