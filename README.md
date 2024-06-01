@@ -21,3 +21,7 @@ For MicroPython 1.20 to 1.21:
 For MicroPython 1.22:
 
     pip install mpy-cross-v6.2
+
+For MicroPython 1.23:
+
+    pip install mpy-cross-v6.3

@@ -3,12 +3,12 @@ name: Build and upload to PyPI
 on:
   push:
     branches:
-      - mpy-cross-v6.2
+      - mpy-cross-v6.3
     tags:
-      - mpy-cross-v6.2/*
+      - mpy-cross-v6.3/*
   pull_request:
     branches:
-      - mpy-cross-v6.2
+      - mpy-cross-v6.3
 
 jobs:
   build_wheels:
