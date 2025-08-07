@@ -9,7 +9,7 @@ description = "Python wrapper for the mpy-cross tool from MicroPython."
 readme = "README.md"
 
 [project.scripts]
-"mpy-cross-v6.3" = "mpy_cross_v6_3:_run"
+"mpy-cross-v6.3" = "mpy_cross_v6_3:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]

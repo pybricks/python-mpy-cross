@@ -7,7 +7,7 @@ import platform
 from typing import List, Optional, Tuple
 
 
-MPY_CROSS_PATH = (
+MPY_CROSS_PATH = str(
     (pathlib.Path(__file__).parent / "mpy-cross")
     .with_suffix(".exe" if platform.system() == "Windows" else "")
     .absolute()
@@ -42,7 +42,7 @@ def mpy_cross_compile(
     emit: Optional[Emitter] = None,
     heap_size: Optional[int] = None,
     extra_args: Optional[List[str]] = None,
-) -> Tuple[subprocess.CompletedProcess, Optional[bytes]]:
+) -> Tuple[subprocess.CompletedProcess[bytes], Optional[bytes]]:
     """
     Compiles a file using mpy-cross.
 
@@ -75,13 +75,13 @@ def mpy_cross_compile(
         ...
 
     """
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        tmp_dir = pathlib.Path(tmp_dir)
+    with tempfile.TemporaryDirectory() as tmp_dir_name:
+        tmp_dir = pathlib.Path(tmp_dir_name)
 
         with open(tmp_dir / "tmp.py", "w") as in_file:
             in_file.write(file_contents)
 
-        args = [MPY_CROSS_PATH, in_file.name, "-s", file_name]
+        args: list[str] = [MPY_CROSS_PATH, in_file.name, "-s", file_name]
 
         if optimization_level is not None:
             if optimization_level not in range(4):
@@ -124,7 +124,7 @@ def mpy_cross_version() -> str:
     return proc.stdout.decode().strip()
 
 
-def _run():
+def run() -> None:
     """
     Run mpy-cross directly.
     """
