@@ -11,6 +11,7 @@ class FeatureFlags(IntFlag):
 def test_compile_no_opts():
     p, mpy = mpy_cross_compile("test.py", "")
     p.check_returncode()
+    assert mpy is not None
 
     magic, version, flags, small_int_bits = struct.unpack_from("BBBB", mpy)
 
@@ -35,6 +36,7 @@ def test_compile_opt_no_unicode():
 def test_compile_opt_small_int_bits():
     p, mpy = mpy_cross_compile("test.py", "", small_number_bits=63)
     p.check_returncode()
+    assert mpy is not None
 
     magic, version, flags, small_int_bits = struct.unpack_from("BBBB", mpy)
 

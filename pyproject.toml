@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mpy-cross-v5"
-version = "1.0.2"
+version = "1.1.0"
 description = "Python wrapper for the mpy-cross tool from MicroPython."
 readme = "README.md"
 
 [project.scripts]
-mpy-cross-v5 = "mpy_cross_v5:_run"
+"mpy-cross-v5" = "mpy_cross_v5:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
