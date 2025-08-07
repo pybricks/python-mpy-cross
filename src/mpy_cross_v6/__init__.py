@@ -1,13 +1,12 @@
 from enum import Enum
 import subprocess
 import sys
-import tempfile
 import pathlib
 import platform
 from typing import List, Optional, Tuple
 
 
-MPY_CROSS_PATH = (
+MPY_CROSS_PATH = str(
     (pathlib.Path(__file__).parent / "mpy-cross")
     .with_suffix(".exe" if platform.system() == "Windows" else "")
     .absolute()
@@ -42,7 +41,7 @@ def mpy_cross_compile(
     emit: Optional[Emitter] = None,
     heap_size: Optional[int] = None,
     extra_args: Optional[List[str]] = None,
-) -> Tuple[subprocess.CompletedProcess, Optional[bytes]]:
+) -> Tuple[subprocess.CompletedProcess[bytes], Optional[bytes]]:
     """
     Compiles a file using mpy-cross.
 
@@ -75,44 +74,32 @@ def mpy_cross_compile(
         ...
 
     """
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        tmp_dir = pathlib.Path(tmp_dir)
+    args: list[str] = [MPY_CROSS_PATH, "-", "-s", file_name]
 
-        with open(tmp_dir / "tmp.py", "w") as in_file:
-            in_file.write(file_contents)
+    if optimization_level is not None:
+        if optimization_level not in range(4):
+            raise ValueError("optimization_level must be between 0 and 3")
 
-        args = [MPY_CROSS_PATH, in_file.name, "-s", file_name]
+        args.append(f"-O{optimization_level}")
 
-        if optimization_level is not None:
-            if optimization_level not in range(4):
-                raise ValueError("optimization_level must be between 0 and 3")
+    if small_number_bits is not None:
+        args.append(f"-msmall-int-bits={small_number_bits}")
 
-            args.append(f"-O{optimization_level}")
+    if arch is not None:
+        args.append(f"-march={arch.value}")
 
-        if small_number_bits is not None:
-            args.append(f"-msmall-int-bits={small_number_bits}")
+    if emit is not None:
+        args += ["-X", f"emit={emit.value}"]
 
-        if arch is not None:
-            args.append(f"-march={arch.value}")
+    if heap_size is not None:
+        args += ["-X", f"heapsize={heap_size}"]
 
-        if emit is not None:
-            args += ["-X", f"emit={emit.value}"]
+    if extra_args:
+        args += extra_args
 
-        if heap_size is not None:
-            args += ["-X", f"heapsize={heap_size}"]
+    process = subprocess.run(args, capture_output=True, input=file_contents.encode())
 
-        if extra_args:
-            args += extra_args
-
-        process = subprocess.run(args, capture_output=True)
-
-        try:
-            with open(tmp_dir / "tmp.mpy", "rb") as out_file:
-                data = out_file.read()
-        except OSError:
-            data = None
-
-        return process, data
+    return process, process.stdout if process.returncode == 0 else None
 
 
 def mpy_cross_version() -> str:
@@ -124,7 +111,7 @@ def mpy_cross_version() -> str:
     return proc.stdout.decode().strip()
 
 
-def _run():
+def run() -> None:
     """
     Run mpy-cross directly.
     """
