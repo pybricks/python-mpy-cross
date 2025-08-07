@@ -6,7 +6,10 @@ from [MicroPython](https://github.com/micropython/micropython) via PyPI.
 There are multiple MPY ABI versions, so you will need to install the package
 that corresponds to the target MicroPython version.
 
-For MicroPython 1.23:
+Alternatively, you can install the [mpy-cross-multi](https://pypi.org/project/mpy-cross-multi/)
+package to install all versions of `mpy-cross` at once.
+
+For MicroPython 1.23 and up:
 
     pip install mpy-cross-v6.3
 
