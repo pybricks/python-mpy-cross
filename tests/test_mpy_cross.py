@@ -37,6 +37,19 @@ def test_compile_with_syntax_error():
     assert mpy is None
 
 
+def test_windows_does_not_treat_binary_stdout_as_text():
+    # 'Hello' creates a \n byte which Windows tries to convert to a \r\n if
+    # the stdout is treated as text.
+    p, mpy = mpy_cross_compile("test.py", "print('Hello')")
+    p.check_returncode()
+    assert mpy is not None
+
+    assert 0x0A in mpy, "Expected binary output to contain a newline byte"
+    assert (
+        0x0D not in mpy
+    ), "Expected binary output to not contain a carriage return byte"
+
+
 def test_version():
     ver = mpy_cross_version()
 
