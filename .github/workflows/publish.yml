@@ -16,25 +16,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [ubuntu-22.04, ubuntu-24.04-arm, windows-latest, windows-11-arm, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Set up QEMU
-        if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
-
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.1.3
         env:
           CIBW_ARCHS_MACOS: x86_64 arm64
-          CIBW_ARCHS_LINUX: x86_64 aarch64
-          CIBW_ARCHS_WINDOWS: auto ARM64
+          CIBW_ARCHS_LINUX: auto
+          CIBW_ARCHS_WINDOWS: auto
 
       - uses: actions/upload-artifact@v4
         with:
