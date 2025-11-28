@@ -30,7 +30,7 @@ jobs:
           CIBW_ARCHS_LINUX: auto
           CIBW_ARCHS_WINDOWS: auto
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: artifact-${{ matrix.os }}
           path: ./wheelhouse/*.whl
@@ -46,7 +46,7 @@ jobs:
       - name: Build sdist
         run: pipx run build --sdist
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: artifact-source
           path: dist/*.tar.gz
