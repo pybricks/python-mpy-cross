@@ -26,3 +26,5 @@ extend-exclude = "micropython"
 
 [tool.cibuildwheel]
 build = "cp313-*"
+test-requires = "pytest"
+test-command = "pytest {project}/tests"
