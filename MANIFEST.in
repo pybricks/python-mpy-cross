@@ -1,7 +1,0 @@
-recursive-include micropython py/** mpy-cross/** shared/** tools/**
-include micropython/docs/conf.py
-include micropython/extmod/modplatform.h
-prune micropython/mpy-cross/build*
-prune micropython/ports*
-exclude src/mpy_cross_v6.3/mpy-cross*
-prune src/mpy_cross_v6.3.egg-info
